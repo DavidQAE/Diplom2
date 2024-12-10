@@ -3,10 +3,7 @@ package ordertest;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-import order.CreateOrder;
-import order.Data;
 import order.OrderClient;
-import order.User;
 import org.junit.Test;
 import url.BaseUrl;
 import user.CreateUser;
@@ -14,18 +11,14 @@ import user.UserBody;
 import user.UserClient;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.hamcrest.Matchers.*;
 
-public class GetUserOrders extends BaseUrl{
+public class GetUserOrdersTest extends BaseUrl{
     String accessToken;
     OrderClient orderClient = new OrderClient();
     UserClient userClient = new UserClient();
 
-    @DisplayName("Get orders of Authorized User and check")
     @Test
     public void getAuthorizedUserOrdersAndCheck() {
               registerAndLoginUser();

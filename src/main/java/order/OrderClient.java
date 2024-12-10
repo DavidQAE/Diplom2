@@ -1,43 +1,44 @@
 package order;
+import url.ApiKeys;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
-public class OrderClient {
+public class OrderClient extends ApiKeys{
 
     public Response createNoAutho(CreateOrder createOrder) {
         return given()
                 .header("Content-type", "application/json")
                 .body(createOrder)
-                .post("/api/orders");
+                .post(orderKey);
     }
     public Response createWithAutho(CreateOrder createOrder, String accessToken) {
         return given()
                 .header("Content-type", "application/json")
                 .auth().oauth2(accessToken)
                 .body(createOrder)
-                .post("/api/orders");
+                .post(orderKey);
     }
     public Response createWithoutIngredients() {
         return given()
                 .header("Content-type", "application/json")
-                .post("/api/orders");
+                .post(orderKey);
     }
     public Response getIngredients() {
         return given()
                 .header("Content-type", "application/json")
-                .get("/api/ingredients");
+                .get(ingredientsKey);
     }
 
     public Response getOrdersAutho(String accessToken) {
         return given()
                 .header("Content-type", "application/json")
                 .auth().oauth2(accessToken)
-                .get("/api/orders");
+                .get(orderKey);
     }
 
     public Response getOrdersNoAutho() {
         return given()
                 .header("Content-type", "application/json")
-                .get("/api/orders");
+                .get(orderKey);
     }
 }

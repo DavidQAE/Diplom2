@@ -1,21 +1,22 @@
 package user;
+import url.ApiKeys;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
-public class UserClient {
+public class UserClient extends ApiKeys{
 
-public Response create(CreateUser createUser) {
+public Response create (CreateUser createUser) {
     return given()
             .header("Content-type", "application/json")
             .body(createUser)
-            .post("/api/auth/register");
+            .post(registerKey);
 }
 
 public Response delete(String accessToken) {
     return given()
             .header("Content-type", "application/json")
             .auth().oauth2(accessToken)
-            .delete("/api/auth/user");
+            .delete(userKey);
 }
 
 
@@ -23,14 +24,14 @@ public Response login(LoginUser loginUser) {
     return given()
             .header("Content-type", "application/json")
             .body(loginUser)
-            .post("/api/auth/login");
+            .post(loginKey);
 }
 
     public Response loginCreds(CreateUser createUser) {
         return given()
                 .header("Content-type", "application/json")
                 .body(UserCreds.credsFromUser(createUser))
-                .post("/api/auth/login");
+                .post(loginKey);
     }
 
 
@@ -39,13 +40,13 @@ public Response login(LoginUser loginUser) {
                 .header("Content-type", "application/json")
                 .body(changeUserInfo)
                 .auth().oauth2(accessToken)
-                .patch("/api/auth/user");
+                .patch(userKey);
     }
 
     public Response change401( ChangeUserInfo changeUserInfo) {
         return given()
                 .header("Content-type", "application/json")
                 .body(changeUserInfo)
-                .patch("/api/auth/user");
+                .patch(userKey);
     }
 }

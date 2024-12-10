@@ -10,7 +10,7 @@ import user.*;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class ChangeUser extends BaseUrl {
+public class ChangeUserTest extends BaseUrl {
 
 String accessToken;
 UserClient userClient = new UserClient();
